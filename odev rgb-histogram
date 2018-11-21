@@ -1,0 +1,39 @@
+mport matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import numpy as np
+img=mpimg.imread('image.jpg')
+%matplotlib inline
+
+def my_f1(image_1):
+h_1={}
+for i in range(image_1.shape[0]):
+for j in range(image_1.shape[1]):
+if(image_1[i,j,0]) in h_1.keys():
+h_1[image_1[i,j,0]]=h_1[image_1[i,j,0]]+1
+else:
+h_1[image_1[i,j,0]]=1
+return h_1
+
+def my_f2(image_2):
+h_1={}
+for i in range(image_2.shape[0]):
+for j in range(image_2.shape[1]):
+if(image_2[i,j,1]) in h_1.keys():
+h_1[image_2[i,j,1]]=h_1[image_2[i,j,1]]+1
+else:
+h_1[image_2[i,j,1]]=1
+return h_1
+
+def my_f3(image_3):
+h_1={}
+for i in range(image_3.shape[0]):
+for j in range(image_3.shape[1]):
+if(image_3[i,j,2]) in h_1.keys():
+h_1[image_3[i,j,2]]=h_1[image_3[i,j,2]]+1
+else:
+h_1[image_3[i,j,2]]=1
+return h_1
+
+print("red degerleri histogramı: ", my_f1(img))
+print("green degerleri histogramı: ", my_f2(img))
+print("blue degerleri histogramı: ", my_f3(img))
