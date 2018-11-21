@@ -1,0 +1,29 @@
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import numpy as np
+img=mpimg.imread('orman.jpg')
+%matplotlib inline
+
+def get_distance (v,w=[1/3,1/3,1/3]):
+a,b,c=v[0],v[1],v[2]
+w1,w2,w3=w[0],w[1],w[2]
+d=((a2)*w1+(b2)*w2+(c**2)*w3)**5
+return d
+
+def convert_graytobw(image):
+m=image.shape[0]
+n=image.shape[1]
+im_bw=np.zeros((m,n))
+for i in range (m):
+for j in range(n):
+if im_bw[i,j]>120:
+im_bw[i,j]=1
+else:
+im_bw[i,j]=0
+im_bw[i,j]=get_distance(image[i,j,:])
+return im_bw
+
+im_4= convert_graytobw(img)
+
+plt.subplot(1,3,1),plt.imshow(img)
+plt.subplot(1,3,2),plt.imshow(im_4, cmap='gray')
