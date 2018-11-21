@@ -1,0 +1,73 @@
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import numpy as np
+img=mpimg.imread('adsiz.jpg')
+%matplotlib inline
+
+def get_distance (v,w=[1/3,1/3,1/3]):
+a,b,c=v[0],v[1],v[2]
+w1,w2,w3=w[0],w[1],w[2]
+d=((a2)*w1+(b2)*w2+(c2)*w3).5
+return d
+
+def convert_rgbtogray(im_1):
+m=im_1.shape[0]
+n=im_1.shape[1]
+im_2=np.zeros((m,n))
+for i in range (m):
+for j in range(n):
+im_2[i,j]=get_distance(im_1[i,j,:])
+return im_2
+
+im_5= convert_rgbtogray(img)
+
+plt.subplot(1,3,1),plt.imshow(img)
+plt.subplot(1,3,2),plt.imshow(im_5, cmap='gray')
+
+def convert_graytobw(image):
+m=image.shape[0]
+n=image.shape[1]
+im_bw=np.zeros((m,n))
+for i in range (m):
+for j in range(n):
+if im_bw[i,j]>120:
+im_bw[i,j]=1
+else:
+im_bw[i,j]=0
+im_bw[i,j]=get_distance(image[i,j,:])
+return im_bw
+
+im_4=convert_graytobw(img)
+
+plt.subplot(1,3,1),plt.imshow(im_5)
+plt.subplot(1,3,2),plt.imshow(im_4, cmap='gray')
+
+my_block=im_4[10:12,50:52]
+my_block=my_block.reshape(1,4)
+my_block.shape
+
+def pixel_compenent(img):
+m=img.shape[0] # black 0 white 1
+n=img.shape[1]
+ext=0
+inte=0
+for i in range (1,m-1):
+for j in range(1,n-1):
+blok=img[i-1:i+1,j-1:j+1]
+b=0
+w=0
+for k in range(2):
+for l in range(2):
+if blok[k,l]==1:
+b=b+1
+else:
+w=w+1
+if(b>w and w>0):
+ext=ext+1
+elif(w>b and b>0):
+inte=inte+1
+
+print(ext)
+print(inte)
+print((ext-inte)/4)
+pixel_compenent(im_4)
