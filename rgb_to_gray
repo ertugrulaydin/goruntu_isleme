@@ -1,0 +1,25 @@
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import numpy as np
+img=mpimg.imread('orman.jpg')
+%matplotlib inline
+
+def get_distance (v,w=[1/3,1/3,1/3]):
+a,b,c=v[0],v[1],v[2]
+w1,w2,w3=w[0],w[1],w[2]
+d=((a2)*w1+(b2)*w2+(c2)*w3).5
+return d
+
+def convert_rgbtogray(im_1):
+m=im_1.shape[0]
+n=im_1.shape[1]
+im_2=np.zeros((m,n))
+for i in range (m):
+for j in range(n):
+im_2[i,j]=get_distance(im_1[i,j,:])
+return im_2
+
+im_5= convert_rgbtogray(img)
+
+plt.subplot(1,3,1),plt.imshow(img)
+plt.subplot(1,3,2),plt.imshow(im_5, cmap='gray')
